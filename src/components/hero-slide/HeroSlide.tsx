@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import tmdbApi, { Category, MovieType, Params } from "../../api/tmdb-api";
+import tmdbApi, { Category, movieType } from "../../api/tmdb-api";
 
 import SwiperCore, { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -17,9 +17,9 @@ const HeroSlide = () => {
 
     useEffect(() => {
         const getMovies = async () => {
-            const params: Params = { page: 1 };
+            const params = { page: 1 };
             try {
-                const response = await tmdbApi.getMoviesList(MovieType.Popular, params);
+                const response = await tmdbApi.getMoviesList(movieType.popular, {params});
                 setMovieItems(response.results.slice(0, 5));
             } catch {
                 console.log("error");
