@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./modal.scss";
+import { BiX } from "react-icons/bi";
 
 interface ModalProps {
   id?: string;
@@ -22,11 +23,16 @@ const Modal: React.FC<ModalProps> = ({ id, active, children }) => {
   );
 };
 
-export const ModalContent: React.FC<ModalProps> = (props) => {
-    const contentRef = useRef<HTMLDivElement | null>(null);
+interface ModalContentProps {
+  children?: React.ReactNode;
+  onClose?: () => void;
+}
+
+export const ModalContent: React.FC<ModalContentProps> = (props) => {
+    const contentRef = useRef<any | null>(null);
 
     const closeModal = () => {
-        // contentRef.current?.parentNode?.classList.remove('active');
+        contentRef.current?.parentNode?.classList.remove('active');
         if (props.onClose) props.onClose();
     }
 
@@ -34,7 +40,7 @@ export const ModalContent: React.FC<ModalProps> = (props) => {
         <div ref={contentRef} className="modal__content">
             {props.children}
             <div className="modal__content__close" onClick={closeModal}>
-                <i className="bx bx-x"></i>
+            <BiX />
             </div>
         </div>
     )

@@ -1,9 +1,11 @@
+import Movie from "../models/Movie";
+import Video from "../models/Video";
 import axiosClient from "./axios-client";
 
-export const category = {
-  movie: "movie",
-  tv: "tv",
-};
+export enum Category {
+  Movie = "movie",
+  Tv = "tv",
+}
 
 export enum MovieType {
   Upcoming = "upcoming",
@@ -21,9 +23,9 @@ export interface Params {
   page?: number;
 }
 
-interface ApiResponse {
+interface ApiResponse<T> {
     page: number;
-    results: any[];
+    results: T[];
     total_pages: number;
     total_results: number;
 }
@@ -31,7 +33,7 @@ interface ApiResponse {
 const tmdbApi = {
   getMoviesList: (type: MovieType, params: Params) => {
     const url = "movie/" + type;
-    return axiosClient.get<any, ApiResponse>(url, {
+    return axiosClient.get<any, ApiResponse<Movie>>(url, {
       params: params,
     });
   },
@@ -39,10 +41,10 @@ const tmdbApi = {
   //     const url = 'tv/' + tvType[type];
   //     return axiosClient.get(url, params);
   // },
-  // getVideos: (cate: number, id: string) => {
-  //     const url = category[cate] + '/' + id + '/videos';
-  //     return axiosClient.get(url, {params: {}});
-  // },
+  getVideos: (cate: Category, id: number) => {
+      const url = cate + '/' + id + '/videos';
+      return axiosClient.get<any, ApiResponse<Video>>(url, {params: {}});
+  },
   // search: (cate: number, params: any) => {
   //     const url = 'search/' + category[cate];
   //     return axiosClient.get(url, params);
