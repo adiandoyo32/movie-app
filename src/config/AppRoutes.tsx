@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import AppLayout from "../components/layout/AppLayout";
 import Catalog from "../pages/Catalog";
-import Detail from "../pages/Detail";
+import Detail from "../pages/Detail/Detail";
 import Home from "../pages/Home";
 
 const AppRoutes = () => {

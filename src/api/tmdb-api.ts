@@ -42,6 +42,7 @@ export interface Params {
 }
 
 interface ApiResponse<T> {
+    cast: any;
     page: number;
     results: T[];
     total_pages: number;
@@ -61,18 +62,18 @@ const tmdbApi = {
         const url = category[cate] + "/" + id + "/videos";
         return axiosClient.get<any, ApiResponse<Video>>(url, { params: {} });
     },
-    // search: (cate: number, params: any) => {
-    //     const url = 'search/' + category[cate];
-    //     return axiosClient.get(url, params);
-    // },
-    // detail: (cate: number, id: string, params: any) => {
-    //     const url = category[cate] + '/' + id;
-    //     return axiosClient.get(url, params);
-    // },
-    // credits: (cate: number, id: string) => {
-    //     const url = category[cate] + '/' + id + '/credits';
-    //     return axiosClient.get(url, {params: {}});
-    // },
+    search: (cate: any, params: any) => {
+        const url = 'search/' + category[cate];
+        return axiosClient.get<any, ApiResponse<any>>(url, params);
+    },
+    detail: (cate: any, id: any, params: any) => {
+        const url = category[cate] + '/' + id;
+        return axiosClient.get<any, ApiResponse<any>>(url, params);
+    },
+    credits: (cate: any, id: any) => {
+        const url = category[cate] + '/' + id + '/credits';
+        return axiosClient.get<any, ApiResponse<any>>(url, {params: {}});
+    },
     similar: (cate: any, id: any) => {
         const url = category[cate] + '/' + id + '/similar';
         return axiosClient.get<any, ApiResponse<any>>(url, {params: {}});

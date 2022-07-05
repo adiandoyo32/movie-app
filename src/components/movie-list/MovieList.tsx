@@ -8,7 +8,7 @@ import "./movie-list.scss"
 interface MovieListProps {
     id?: number;
     type: string;
-    category: string;
+    category: any;
 }
 
 const MovieList: React.FC<MovieListProps> = (props) => {
