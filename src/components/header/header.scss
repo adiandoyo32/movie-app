@@ -26,6 +26,11 @@
   z-index: 99;
   transition: height 0.3s ease, background-color 0.3s ease;
 
+  &.shrink {
+    height: $header-shrink-height;
+    background-color: $body-bg;
+}
+
   &__wrap {
     @include flex(center, space-between);
     height: 100%;

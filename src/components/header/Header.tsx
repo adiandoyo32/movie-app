@@ -25,7 +25,7 @@ const headerNav: HeaderProps[] = [
 
 const Header = () => {
   const { pathname } = useLocation();
-  const headerRef = useRef<HTMLDivElement | null>(null);
+  const headerRef = useRef<any>(null);
   const active = headerNav.findIndex((e) => e.path === pathname);
 
   useEffect(() => {
